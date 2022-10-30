@@ -21,6 +21,7 @@ public class ResponseFindOrders {
         private int size;
         private Long totalCount;
         private int totalPage;
+        private String sort;
     }
 
     @Builder
