@@ -33,6 +33,7 @@ public class OrderService {
                         .size(orders.getSize())
                         .totalCount(orders.getTotalElements())
                         .totalPage(orders.getTotalPages())
+                        .sort(pageable.getSort().toString())
                         .build())
                 .orders(orders == null
                         ? null
@@ -41,14 +42,14 @@ public class OrderService {
     }
 
     public ResponseFindOrder findOrder(final Long orderId){
-        OrderDto order = OrderDto.toDto(ordersRepository.findById(orderId)
+        Orders orders = ordersRepository.findById(orderId)
                 .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND,
                         HttpStatus.NOT_FOUND.value(),
                         HttpStatus.NOT_FOUND.getReasonPhrase(),
-                        HttpStatus.NOT_FOUND.getReasonPhrase())));
+                        HttpStatus.NOT_FOUND.getReasonPhrase()));
 
         return ResponseFindOrder.builder()
-                .order(order)
+                .order(OrderDto.toDto(orders))
                 .build();
     }
 
