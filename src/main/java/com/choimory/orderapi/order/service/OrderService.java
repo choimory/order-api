@@ -1,13 +1,18 @@
 package com.choimory.orderapi.order.service;
 
+import com.choimory.orderapi.common.exception.CommonException;
+import com.choimory.orderapi.order.dto.dto.OrderDto;
 import com.choimory.orderapi.order.dto.request.RequestFindOrders;
 import com.choimory.orderapi.order.dto.response.ResponseAcceptOrder;
 import com.choimory.orderapi.order.dto.response.ResponseCompleteOrder;
 import com.choimory.orderapi.order.dto.response.ResponseFindOrder;
 import com.choimory.orderapi.order.dto.response.ResponseFindOrders;
+import com.choimory.orderapi.order.entity.Order;
 import com.choimory.orderapi.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,20 +23,62 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public ResponseFindOrders findOrders(final Pageable pageable, final RequestFindOrders param){
-        return null;
+        Page<ResponseFindOrders.OrderOfFindOrders> orders = orderRepository.findOrders(pageable, param);
+
+        return ResponseFindOrders.builder()
+                .pagination(orders == null
+                        ? null
+                        : ResponseFindOrders.PaginationOfFindOrders.builder()
+                        .page(orders.getNumber())
+                        .size(orders.getSize())
+                        .totalCount(orders.getTotalElements())
+                        .totalPage(orders.getTotalPages())
+                        .build())
+                .orders(orders == null
+                        ? null
+                        : orders.getContent())
+                .build();
     }
 
     public ResponseFindOrder findOrder(final Long orderId){
-        return null;
+        OrderDto order = OrderDto.toDto(orderRepository.findById(orderId)
+                .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND,
+                        HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase())));
+
+        return ResponseFindOrder.builder()
+                .order(order)
+                .build();
     }
 
     @Transactional
     public ResponseAcceptOrder acceptOrder(final Long orderId){
-        return null;
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND,
+                        HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase()));
+
+        order.orderToAccept();
+
+        return ResponseAcceptOrder.builder()
+                .acceptedOrder(OrderDto.toDto(order))
+                .build();
     }
 
     @Transactional
     public ResponseCompleteOrder completeOrder(final Long orderId){
-        return null;
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND,
+                        HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase()));
+
+        order.orderToComplete();
+
+        return ResponseCompleteOrder.builder()
+                .completedOrder(OrderDto.toDto(order))
+                .build();
     }
 }

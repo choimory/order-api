@@ -2,6 +2,7 @@ create or replace table `order`
 (
     id      bigint auto_increment,
     status  varchar(255) not null,
+    orderer varchar (255) not null,
     address varchar(500) null,
     item_id bigint       null,
     created_at datetime not null,

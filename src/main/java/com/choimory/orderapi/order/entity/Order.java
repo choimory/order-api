@@ -19,17 +19,27 @@ public class Order extends CommonDateTimeEntity {
     private Long id;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    private String orderer;
     private String address;
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
     @Builder(toBuilder = true)
-    public Order(LocalDateTime createdAt, LocalDateTime modifiedAt, LocalDateTime deletedAt, Long id, OrderStatus status, String address, Item item) {
+    public Order(LocalDateTime createdAt, LocalDateTime modifiedAt, LocalDateTime deletedAt, Long id, OrderStatus status, String orderer, String address, Item item) {
         super(createdAt, modifiedAt, deletedAt);
         this.id = id;
         this.status = status;
+        this.orderer = orderer;
         this.address = address;
         this.item = item;
+    }
+
+    public void orderToAccept(){
+        this.status = OrderStatus.ACCEPT;
+    }
+
+    public void orderToComplete(){
+        this.status = OrderStatus.COMPLETE;
     }
 }

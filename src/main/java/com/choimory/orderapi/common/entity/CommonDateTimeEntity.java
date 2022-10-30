@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public abstract class CommonDateTimeEntity implements Serializable {
+public class CommonDateTimeEntity implements Serializable {
     @CreatedDate
     protected LocalDateTime createdAt;
     @LastModifiedDate
