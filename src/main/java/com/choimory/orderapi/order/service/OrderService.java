@@ -61,7 +61,7 @@ public class OrderService {
                         HttpStatus.NOT_FOUND.getReasonPhrase(),
                         HttpStatus.NOT_FOUND.getReasonPhrase()));
 
-        orders.orderToAccept();
+        orders.acceptOrder();
 
         return ResponseAcceptOrder.builder()
                 .acceptedOrder(OrderDto.toDto(orders))
@@ -76,7 +76,7 @@ public class OrderService {
                         HttpStatus.NOT_FOUND.getReasonPhrase(),
                         HttpStatus.NOT_FOUND.getReasonPhrase()));
 
-        orders.orderToComplete();
+        orders.completeOrder();
 
         return ResponseCompleteOrder.builder()
                 .completedOrder(OrderDto.toDto(orders))

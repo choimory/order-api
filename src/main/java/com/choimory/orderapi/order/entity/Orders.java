@@ -37,11 +37,11 @@ public class Orders extends CommonDateTimeEntity {
         this.item = item;
     }
 
-    public void orderToAccept(){
+    public void acceptOrder(){
         this.status = OrderStatus.ACCEPT;
     }
 
-    public void orderToComplete(){
+    public void completeOrder(){
         this.status = OrderStatus.COMPLETE;
     }
 }
