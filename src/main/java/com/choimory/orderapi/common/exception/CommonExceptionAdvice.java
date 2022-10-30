@@ -15,7 +15,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestControllerAdvice("io.test.code.dynamicmenu")
+@RestControllerAdvice("com.choimory")
 @Slf4j
 public class CommonExceptionAdvice {
     @ExceptionHandler({Exception.class})
