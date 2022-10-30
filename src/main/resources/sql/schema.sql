@@ -1,4 +1,4 @@
-create or replace table `order`
+create or replace table `orders`
 (
     id      bigint auto_increment,
     status  varchar(255) not null,

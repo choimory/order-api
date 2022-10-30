@@ -21,7 +21,7 @@ public class Item extends CommonDateTimeEntity {
     private String name;
     private String description;
     private Long price;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private List<ItemImage> images = new ArrayList();
     @ManyToOne
     @JoinColumn(name = "store_id")

@@ -20,7 +20,7 @@ public class Store extends CommonDateTimeEntity {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private List<Item> items = new ArrayList<>();
 
     @Builder(toBuilder = true)

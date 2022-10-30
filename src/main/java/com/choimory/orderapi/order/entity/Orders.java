@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Order extends CommonDateTimeEntity {
+public class Orders extends CommonDateTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,7 @@ public class Order extends CommonDateTimeEntity {
     private Item item;
 
     @Builder(toBuilder = true)
-    public Order(LocalDateTime createdAt, LocalDateTime modifiedAt, LocalDateTime deletedAt, Long id, OrderStatus status, String orderer, String address, Item item) {
+    public Orders(LocalDateTime createdAt, LocalDateTime modifiedAt, LocalDateTime deletedAt, Long id, OrderStatus status, String orderer, String address, Item item) {
         super(createdAt, modifiedAt, deletedAt);
         this.id = id;
         this.status = status;

@@ -1,9 +1,7 @@
 package com.choimory.orderapi.order.dto.response;
 
 import com.choimory.orderapi.order.enums.OrderStatus;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,22 +13,24 @@ public class ResponseFindOrders {
     private final List<OrderOfFindOrders> orders;
 
     @Builder
-    @RequiredArgsConstructor
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
     public static class PaginationOfFindOrders{
-        private final int page;
-        private final int size;
-        private final Long totalCount;
-        private final int totalPage;
+        private int page;
+        private int size;
+        private Long totalCount;
+        private int totalPage;
     }
 
     @Builder
-    @RequiredArgsConstructor
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
     public static class OrderOfFindOrders{
-        private final Long id;
-        private final OrderStatus status;
-        private final String orderer;
-        private final String address;
+        private Long id;
+        private OrderStatus status;
+        private String orderer;
+        private String address;
     }
 }

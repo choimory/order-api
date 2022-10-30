@@ -1,7 +1,7 @@
 package com.choimory.orderapi.order.dto.dto;
 
 import com.choimory.orderapi.item.dto.dto.ItemDto;
-import com.choimory.orderapi.order.entity.Order;
+import com.choimory.orderapi.order.entity.Orders;
 import com.choimory.orderapi.order.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,13 +19,13 @@ public class OrderDto {
     private String address;
     private ItemDto item;
 
-    public static OrderDto toDto(Order order){
+    public static OrderDto toDto(Orders orders){
         return OrderDto.builder()
-                .id(order.getId())
-                .status(order.getStatus())
-                .orderer(order.getOrderer())
-                .address(order.getAddress())
-                .item(ItemDto.toDto(order.getItem()))
+                .id(orders.getId())
+                .status(orders.getStatus())
+                .orderer(orders.getOrderer())
+                .address(orders.getAddress())
+                .item(ItemDto.toDto(orders.getItem()))
                 .build();
     }
 }
