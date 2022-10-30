@@ -1,5 +1,6 @@
 package com.choimory.orderapi.item.entity;
 
+import com.choimory.orderapi.common.entity.CommonDateTimeEntity;
 import com.choimory.orderapi.store.entity.Store;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+public class Item extends CommonDateTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

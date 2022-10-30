@@ -1,11 +1,12 @@
 package com.choimory.orderapi.item.entity;
 
+import com.choimory.orderapi.common.entity.CommonDateTimeEntity;
 import com.choimory.orderapi.item.enums.ItemImageType;
 
 import javax.persistence.*;
 
 @Entity
-public class ItemImage {
+public class ItemImage extends CommonDateTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
